@@ -59,7 +59,7 @@
 			<artifactId>commons-dbcp2</artifactId>
 			<version>${commons-dbcp2.version}</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency>		
 	</dependencies>
 
 	<build>
