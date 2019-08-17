@@ -67,14 +67,14 @@
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-        <!-- sidebar menu: : style can be found in sidebar.less -->
-        <ul class="sidebar-menu" data-widget="tree">
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
           <li class="header">Menu Principal</li>
           <li><a href="/aluno/list-aluno"><i class="fa fa-users"></i> <span>Alunos</span></a></li>
           <li><a href="/curso/list-curso"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
           <li><a href="/contrato/list-contrato"><i class="fa fa-file"></i> <span>Contratos</span></a></li>
         </ul>
-      </section>
+    </section>
     <!-- /.sidebar -->
   </aside>
 
@@ -82,9 +82,6 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Adverum
-      </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
         <li class="active">Dashboard</li>
@@ -93,54 +90,50 @@
 
     <!-- Main content -->
     <section class="content">
-      <!-- Small boxes (Stat box) -->
       <div class="row">
-        <!-- ./col -->
-        <div class="col-lg-4 col-xs-6">
-          <a href="./aluno/list-aluno">
-            <!-- small box -->
-          <div class="small-box bg-green">
-              <div class="inner">
-                <p>Alunos</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-            </div>
-          </a>
-          
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-4 col-xs-6">
-          <!-- small box -->
-          <a href="./curso/list-curso">
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                  <p>Cursos</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-person-add"></i>
-                </div>
-              </div>
-          </a>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-4 col-xs-6">
-          <!-- small box -->
-          <a href="./contrato/list-contrato">
-            <div class="small-box bg-red">
-                <div class="inner">
-                  <p>Contratos</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
-                </div>
-              </div>
-          </a>
+          <div class="col-xs-12">
+            <h3>Cadastrar Aluno</h3>
 
+            <form class="form-horizontal" th:object="${aluno}" th:action="@{/aluno/createAluno}" method="POST" style="margin: 10px">
+              <div class="form-group">
+                  <div th:if="${showError}" class="alert alert-danger" role="alert">
+                    <span th:text="${error}"></span>
+                  </div>
+                 <fieldset>			
+                  <div class="form-group row">                                                          
+                    <div class="col-md-4" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+                        <label>Nome</label>
+                        <input type="text" class="form-control input-sm" th:field="*{nome}" autofocus="autofocus" placeholder="Nome" maxlength="150" required/>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-md-4" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+                      <label>Email</label> 
+                      <input type="email" class="form-control input-sm" th:field="*{email}" maxlength="100" placeholder="Email" required/>
+                    </div>
+                  </div>	
+                  <div class="form-group row">                                                          
+                    <div class="col-md-4" th:classappend="${#fields.hasErrors('cpf')}? 'has-error'">
+                        <label>CPF</label>
+                        <input type="text" class="form-control input-sm" th:field="*{cpf}" autofocus="autofocus" placeholder="CPF" maxlength="11" required/>
+                    </div>
+                  </div>
+                  <div class="form-group row">                                                          
+                    <div class="col-md-4" th:classappend="${#fields.hasErrors('telefone')}? 'has-error'">
+                        <label>Telefone</label>
+                        <input type="text" class="form-control input-sm" th:field="*{telefone}" autofocus="autofocus" placeholder="Tefefone" maxlength="150" required/>
+                    </div>
+                  </div>				
+                </fieldset>
+              </div>
+              <div class="form-group row">
+                <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                <a th:href="@{/}" class="btn btn-sm btn-primary">Cancelar</a>
+              </div>
+            </form>
+            <!-- /.box -->
+          </div>
         </div>
-        <!-- ./col -->
-      </div>
 
     </section>
     <!-- /.content -->
@@ -344,6 +337,8 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+
+
 
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js" th:src="@{../bower_components/jquery/dist/jquery.min.js}"></script>

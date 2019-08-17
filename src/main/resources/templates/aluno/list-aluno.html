@@ -70,9 +70,9 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Menu Principal</li>
-        <li><a href="./curso/list-aluno"><i class="fa fa-users"></i> <span>Alunos</span></a></li>
-        <li><a href="./aluno/list-curso"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
-        <li><a href="./contrato/list-contrato"><i class="fa fa-file"></i> <span>Contratos</span></a></li>
+        <li><a href="/aluno/list-aluno"><i class="fa fa-users"></i> <span>Alunos</span></a></li>
+        <li><a href="/curso/list-curso"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
+        <li><a href="/contrato/list-contrato"><i class="fa fa-file"></i> <span>Contratos</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -95,6 +95,9 @@
     <section class="content">
       <div class="row">
           <div class="col-xs-12">
+              <div th:if="${showSuccess}" class="alert alert-success " role="alert">
+                <span th:text="${message}"></span>
+              </div>
             <div class="box">
               <div class="box-header">
                 <h3 class="box-title">Alunos</h3>
@@ -102,7 +105,7 @@
                 <div class="box-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <div class="input-group-btn">
-                      <button class="btn btn-primary"><i class="fa fa-search"> Cadastrar Aluno</i></button>
+                      <a href="./create-aluno"class="btn btn-primary"><i class="fa fa-plus"> Cadastrar Aluno</i></a>
                     </div>
                   </div>
                 </div>
@@ -111,39 +114,30 @@
               <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
                   <tr>
-                    <th>ID</th>
-                    <th>User</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Reason</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
                   </tr>
-                  <tr>
-                    <td>183</td>
-                    <td>John Doe</td>
-                    <td>11-7-2014</td>
-                    <td><span class="label label-success">Approved</span></td>
-                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                  </tr>
-                  <tr>
-                    <td>219</td>
-                    <td>Alexander Pierce</td>
-                    <td>11-7-2014</td>
-                    <td><span class="label label-warning">Pending</span></td>
-                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                  </tr>
-                  <tr>
-                    <td>657</td>
-                    <td>Bob Doe</td>
-                    <td>11-7-2014</td>
-                    <td><span class="label label-primary">Approved</span></td>
-                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                  </tr>
-                  <tr>
-                    <td>175</td>
-                    <td>Mike Doe</td>
-                    <td>11-7-2014</td>
-                    <td><span class="label label-danger">Denied</span></td>
-                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                  <tr th:each="aluno, rowStat: ${listAluno}">
+                      <td th:text="${aluno.nome}">Jack</td>
+                      <td th:text="${aluno.email}">Jack</td>
+                      <td th:text="${aluno.cpf}">Jack</td>
+                      <td th:text="${aluno.telefone}">Jack</td>
+                      <td>
+                          <div class="btn-group">
+                              <button type="button" class="btn btn-success">Ações</button>
+                              <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Exibir Ações</span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu">
+                                <li><a href="./edit-aluno/${aluno.id}"><i class="fa fa-edit"></i> Editar</a></li>
+                                <li><a href="./delete-aluno/${aluno.id}"><i class="fa fa-trash"></i> Excluir</a></li>
+                              </ul>
+                            </div>
+                      </td>
                   </tr>
                 </table>
               </div>
@@ -356,42 +350,44 @@
 </div>
 <!-- ./wrapper -->
 
+
 <!-- jQuery 3 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js" th:src="@{../bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.min.js" th:src="@{../bower_components/jquery-ui/jquery-ui.min.js}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js" th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
 <!-- Morris.js charts -->
-<script src="bower_components/raphael/raphael.min.js"></script>
-<script src="bower_components/morris.js/morris.min.js"></script>
+<script src="bower_components/raphael/raphael.min.js" th:src="@{/bower_components/raphael/raphael.min.js}"></script>
+<script src="bower_components/morris.js/morris.min.js" th:src="@{/bower_components/morris.js/morris.min.js}"></script>
 <!-- Sparkline -->
-<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<script src="bower_components/jquery-sparkline/dist/jquery.sparkline.min.js" th:src="@{/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js}"></script>
 <!-- jvectormap -->
-<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" th:src="@{plugins/jvectormap/jquery-jvectormap-1.2.2.min.js}"></script>
+<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js" th:src="@{/plugins/jvectormap/jquery-jvectormap-world-mill-en.js}"></script>
 <!-- jQuery Knob Chart -->
-<script src="bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+<script src="bower_components/jquery-knob/dist/jquery.knob.min.js" th:src="@{/bower_components/jquery-knob/dist/jquery.knob.min.js}"></script>
 <!-- daterangepicker -->
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="bower_components/moment/min/moment.min.js" th:src="@{/bower_components/moment/min/moment.min.js}"></script>
+<script src="bower_components/bootstrap-daterangepicker/daterangepicker.js" th:src="@{/bower_components/bootstrap-daterangepicker/daterangepicker.js}"></script>
 <!-- datepicker -->
-<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" th:src="@{/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" th:src="@{/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js}"></script>
 <!-- Slimscroll -->
-<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js" th:src="@{/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
 <!-- FastClick -->
-<script src="bower_components/fastclick/lib/fastclick.js"></script>
+<script src="bower_components/fastclick/lib/fastclick.js" th:src="@{/bower_components/fastclick/lib/fastclick.js}"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+<script src="dist/js/adminlte.min.js" th:src="@{/dist/js/adminlte.min.js}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard.js"></script>
+<script src="dist/js/pages/dashboard.js" th:src="@{/dist/js/pages/dashboard.js}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="dist/js/demo.js" th:src="@{/dist/js/demo.js}"></script>
+<script src="main.js" th:src="@{/main.js}"></script>
 </body>
 </html>
