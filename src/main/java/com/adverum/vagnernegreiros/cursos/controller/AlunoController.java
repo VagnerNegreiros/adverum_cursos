@@ -122,4 +122,27 @@ public class AlunoController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/aluno/delete-aluno/{id}" ,method = RequestMethod.GET)
+	public ModelAndView deleteAluno(@PathVariable("id") String id) {	
+		
+		ModelAndView model = new ModelAndView("aluno/list-aluno");
+		
+		Long idAluno = Long.parseLong(id);		
+		
+		Aluno aluno = alunoRepository.findById(Long.parseLong(id)).get();
+	
+		alunoRepository.delete(aluno);
+		
+		// Create an empty list 
+        List<Aluno> listAluno = new ArrayList<>(); 
+  
+        alunoRepository.findAll().forEach(listAluno::add);         
+		
+        model.addObject("listAluno", listAluno);
+        model.addObject("showSuccess", true);
+        model.addObject("message", "Aluno removido com sucesso!");        
+		
+		return model;
+	}
+	
 }
