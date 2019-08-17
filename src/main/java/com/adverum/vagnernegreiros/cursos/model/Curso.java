@@ -3,13 +3,9 @@ package com.adverum.vagnernegreiros.cursos.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +20,7 @@ public class Curso {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private Long id;
+	Long id;
 	
 	@NotEmpty
 	String nome;
@@ -34,15 +30,18 @@ public class Curso {
 	
 	@Temporal(TemporalType.DATE)
 	Date dataAlteracao;
+
 	
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	Contrato contrato;
+	public Curso() {
+		super();
+	}
 	
-	
-	Curso(String nome , Date dataInclusao , Date dataAlteracao){
-		this.nome = nome;
-		this.dataInclusao = dataInclusao;
-		this.dataAlteracao = dataAlteracao;
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
