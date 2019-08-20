@@ -100,12 +100,12 @@
               </div>
             <div class="box">
               <div class="box-header">
-                <h3 class="box-title">Alunos</h3>
+                <h3 class="box-title">Contrato</h3>
   
                 <div class="box-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <div class="input-group-btn">
-                      <a href="/aluno/create-aluno"class="btn btn-primary"><i class="fa fa-plus"> Cadastrar Aluno</i></a>
+                      <a href="./create-contrato"class="btn btn-primary"><i class="fa fa-plus"> Cadastrar Contrato</i></a>
                     </div>
                   </div>
                 </div>
@@ -114,17 +114,10 @@
               <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
                   <tr>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>CPF</th>
-                    <th>Telefone</th>
-                    <th>Ações</th>
+                    <th>Código da compra</th>
                   </tr>
-                  <tr th:each="aluno, rowStat: ${listAluno}">
-                      <td th:text="${aluno.nome}">Jack</td>
-                      <td th:text="${aluno.email}">Jack</td>
-                      <td th:text="${aluno.cpf}">Jack</td>
-                      <td th:text="${aluno.telefone}">Jack</td>
+                  <tr th:each="contrato, rowStat: ${listContrato}">
+                      <td th:text="${contrato.codigoCompra}"></td>
                       <td>
                           <div class="btn-group">
                               <button type="button" class="btn btn-success">Ações</button>
@@ -133,8 +126,8 @@
                                 <span class="sr-only">Exibir Ações</span>
                               </button>
                               <ul class="dropdown-menu" role="menu">
-                                <li><a th:href="@{'/aluno/edit-aluno/' + ${aluno.id}}"><i class="fa fa-edit"></i> Editar</a></li>
-                                <li><a th:href="@{'/aluno/delete-aluno/' + ${aluno.id}}"><i class="fa fa-trash"></i> Excluir</a></li>
+                                <li><a th:href="@{'./edit-contrato/' + ${contrato.id}}"><i class="fa fa-edit"></i> Editar</a></li>
+                                <li><a th:href="@{'./delete-contrato/' + ${contrato.id}}"><i class="fa fa-trash"></i> Excluir</a></li>
                               </ul>
                             </div>
                       </td>

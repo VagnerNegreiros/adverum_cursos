@@ -24,42 +24,18 @@ public class Contrato implements Serializable{
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Long id;
-	
-	@NotNull
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	Aluno aluno;
-	
-	@NotNull
-	@OneToOne(fetch = FetchType.EAGER, optional = false)
-	Curso curso;
-	
+
 	@NotEmpty
 	String codigoCompra;
 	
-	public Contrato(Aluno aluno, Curso curso, String codigoCompra) {
-		super();
-		this.aluno = aluno;
-		this.curso = curso;
-		this.codigoCompra = codigoCompra;
-	}
+	public Contrato(){};
 	
+
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public Aluno getAluno() {
-		return aluno;
-	}
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
-	}
-	public Curso getCurso() {
-		return curso;
-	}
-	public void setCurso(Curso curso) {
-		this.curso = curso;
 	}
 	public String getCodigoCompra() {
 		return codigoCompra;
@@ -67,5 +43,6 @@ public class Contrato implements Serializable{
 	public void setCodigoCompra(String codigoCompra) {
 		this.codigoCompra = codigoCompra;
 	}
+
 
 }

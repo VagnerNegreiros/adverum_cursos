@@ -43,11 +43,7 @@ public class Aluno implements Serializable{
 	
 	@NotEmpty
 	private String telefone;	
-	
-	@Column(name="contrato_id")
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "aluno", cascade = CascadeType.MERGE)
-	private Set<Contrato> contratos;
-	
+		
 	public Aluno() {}
 	
 	public String getNome() {
@@ -81,21 +77,6 @@ public class Aluno implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-	
-
-	public Set<Contrato> getContratos() {
-		return contratos;
-	}
-
-	public void setContratos(Set<Contrato> contratos) {
-		this.contratos = contratos;
-	}
-
-	@Override
-	public String toString() {
-		return "Aluno [id=" + id + ", nome=" + nome + ", email=" + email + ", cpf=" + cpf + ", telefone=" + telefone
-				+ ", contratos=" + contratos + "]";
 	}
 	
 

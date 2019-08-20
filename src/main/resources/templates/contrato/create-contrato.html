@@ -69,11 +69,11 @@
     <section class="sidebar">
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">Menu Principal</li>
-        <li><a href="/aluno/list-aluno"><i class="fa fa-users"></i> <span>Alunos</span></a></li>
-        <li><a href="/curso/list-curso"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
-        <li><a href="/contrato/list-contrato"><i class="fa fa-file"></i> <span>Contratos</span></a></li>
-      </ul>
+          <li class="header">Menu Principal</li>
+          <li><a href="/aluno/list-aluno"><i class="fa fa-users"></i> <span>Alunos</span></a></li>
+          <li><a href="/curso/list-curso"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
+          <li><a href="/contrato/list-contrato"><i class="fa fa-file"></i> <span>Contratos</span></a></li>
+        </ul>
     </section>
     <!-- /.sidebar -->
   </aside>
@@ -82,9 +82,6 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Adverum
-      </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Página Inicial</a></li>
         <li class="active">Dashboard</li>
@@ -95,54 +92,27 @@
     <section class="content">
       <div class="row">
           <div class="col-xs-12">
-              <div th:if="${showSuccess}" class="alert alert-success " role="alert">
-                <span th:text="${message}"></span>
-              </div>
-            <div class="box">
-              <div class="box-header">
-                <h3 class="box-title">Alunos</h3>
-  
-                <div class="box-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <div class="input-group-btn">
-                      <a href="/aluno/create-aluno"class="btn btn-primary"><i class="fa fa-plus"> Cadastrar Aluno</i></a>
-                    </div>
+            <h3>Cadastrar Contrato</h3>
+
+            <form class="form-horizontal" th:object="${contrato}" th:action="@{/contrato/createContrato}" method="POST" style="margin: 10px">
+              <div class="form-group">
+                  <div th:if="${showError}" class="alert alert-danger" role="alert">
+                    <span th:text="${error}"></span>
                   </div>
-                </div>
+                 <fieldset>	
+                  <div class="form-group row">                                                          
+                    <div class="col-md-4" th:classappend="${#fields.hasErrors('codigoCompra')}? 'has-error'">
+                        <label>Código da Compra</label>
+                        <input type="text" class="form-control input-sm" th:field="*{codigoCompra}" autofocus="autofocus" placeholder="Código da compra" maxlength="150" required/>
+                    </div>
+                  </div>			
+                </fieldset>
               </div>
-              <!-- /.box-header -->
-              <div class="box-body table-responsive no-padding">
-                <table class="table table-hover">
-                  <tr>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>CPF</th>
-                    <th>Telefone</th>
-                    <th>Ações</th>
-                  </tr>
-                  <tr th:each="aluno, rowStat: ${listAluno}">
-                      <td th:text="${aluno.nome}">Jack</td>
-                      <td th:text="${aluno.email}">Jack</td>
-                      <td th:text="${aluno.cpf}">Jack</td>
-                      <td th:text="${aluno.telefone}">Jack</td>
-                      <td>
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-success">Ações</button>
-                              <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
-                                <span class="sr-only">Exibir Ações</span>
-                              </button>
-                              <ul class="dropdown-menu" role="menu">
-                                <li><a th:href="@{'/aluno/edit-aluno/' + ${aluno.id}}"><i class="fa fa-edit"></i> Editar</a></li>
-                                <li><a th:href="@{'/aluno/delete-aluno/' + ${aluno.id}}"><i class="fa fa-trash"></i> Excluir</a></li>
-                              </ul>
-                            </div>
-                      </td>
-                  </tr>
-                </table>
+              <div class="form-group row">
+                <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                <a th:href="@{/}" class="btn btn-sm btn-primary">Cancelar</a>
               </div>
-              <!-- /.box-body -->
-            </div>
+            </form>
             <!-- /.box -->
           </div>
         </div>
@@ -349,6 +319,7 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+
 
 
 <!-- jQuery 3 -->
